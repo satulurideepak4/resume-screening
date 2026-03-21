@@ -1,0 +1,96 @@
+server:
+  port: 1102
+
+spring:
+  application:
+    name: resume-screening
+
+  # PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5431/resume_screening
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  # Redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: Deepak@1102
+      timeout: 3000ms
+
+  # Kafka
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+    consumer:
+      group-id: resume-scoring-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      properties:
+#        spring.json.trusted.packages: "com.resumescreening.dto"
+#        spring.json.value.default.type: com.resumescreening.dto.ResumeSubmittedEvent
+
+  # RabbitMQ
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+  # Email
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# Application-specific config
+app:
+  kafka:
+    topic:
+      resume-submitted: resume-submissions
+  rabbitmq:
+    exchange: resume-screening-exchange
+    queue:
+      hr-notification: hr-notification-queue
+    routing-key:
+      hr-notification: hr.notification
+  scoring:
+    threshold: 7.0
+    anthropic-api-url: https://api.anthropic.com/v1/messages
+    anthropic-api-key: ${ANTHROPIC_API_KEY}
+    anthropic-model: claude-sonnet-4-20250514
+  hr:
+    email: hr@yourcompany.com
+  redis:
+    score-ttl-hours: 24
+    candidate-ttl-hours: 48
+
+logging:
+  level:
+    com.resumescreening: DEBUG
+    org.springframework.kafka: INFO
+    org.springframework.amqp: INFO
