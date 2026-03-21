@@ -26,7 +26,7 @@ public class ApplicationSubmissionRequest {
 
     private String totalExperience;
 
-    private String currentRole;
+    private String candidateRole;
 
     private String education;
 

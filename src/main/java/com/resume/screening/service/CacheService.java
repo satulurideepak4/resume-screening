@@ -86,7 +86,7 @@ public class CacheService {
                 .candidateFullName(app.getCandidate().getFullName())
                 .candidateEmail(app.getCandidate().getEmail())
                 .candidatePhone(app.getCandidate().getPhone())
-                .currentRole(app.getCandidate().getCurrentRole())
+                .candidateRole(app.getCandidate().getCandidateRole())
                 .totalExperience(app.getCandidate().getTotalExperience())
                 .education(app.getCandidate().getEducation())
                 .location(app.getCandidate().getLocation())

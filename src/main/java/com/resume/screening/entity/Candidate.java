@@ -32,7 +32,7 @@ public class Candidate {
 
     private String totalExperience;   // e.g. "3 years"
 
-    private String currentRole;
+    private String candidateRole;
 
     private String education;
 

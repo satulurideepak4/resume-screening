@@ -142,7 +142,7 @@ public class EmailConsumerService {
                 detailRow("Full name",     event.getCandidateFullName()),
                 detailRow("Email",         event.getCandidateEmail()),
                 detailRow("Phone",         event.getCandidatePhone()),
-                detailRow("Current role",  event.getCurrentRole() + " · " + event.getTotalExperience()),
+                detailRow("Current role",  event.getCandidateRole() + " · " + event.getTotalExperience()),
                 scoreBar("JD alignment",    event.getJdAlignmentPercent()),
                 scoreBar("Experience",      event.getExperiencePercent()),
                 scoreBar("Technical depth", event.getTechnicalDepthPercent()),

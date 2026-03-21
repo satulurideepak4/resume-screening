@@ -50,7 +50,7 @@ public class NotificationService {
                 .candidateFullName(application.getCandidate().getFullName())
                 .candidateEmail(application.getCandidate().getEmail())
                 .candidatePhone(application.getCandidate().getPhone())
-                .currentRole(application.getCandidate().getCurrentRole())
+                .candidateRole(application.getCandidate().getCandidateRole())
                 .totalExperience(application.getCandidate().getTotalExperience())
                 .jobTitle(event.getJobTitle())
                 .jobPostingId(application.getJobPosting().getId())

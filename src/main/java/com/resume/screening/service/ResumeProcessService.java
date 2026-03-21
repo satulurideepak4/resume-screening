@@ -123,7 +123,7 @@ public class ResumeProcessService {
                 .phone(req.getPhone())
                 .location(req.getLocation())
                 .totalExperience(req.getTotalExperience())
-                .currentRole(req.getCurrentRole())
+                .candidateRole(req.getCandidateRole())
                 .education(req.getEducation())
                 .noticePeriod(req.getNoticePeriod())
                 .expectedCtc(req.getExpectedCtc())
@@ -138,7 +138,7 @@ public class ResumeProcessService {
         existing.setPhone(req.getPhone());
         existing.setLocation(req.getLocation());
         existing.setTotalExperience(req.getTotalExperience());
-        existing.setCurrentRole(req.getCurrentRole());
+        existing.setCandidateRole(req.getCandidateRole());
         existing.setEducation(req.getEducation());
         existing.setNoticePeriod(req.getNoticePeriod());
         existing.setExpectedCtc(req.getExpectedCtc());

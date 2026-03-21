@@ -20,7 +20,7 @@ public class ApplicationDashboardDto {
     private String candidateFullName;
     private String candidateEmail;
     private String candidatePhone;
-    private String currentRole;
+    private String candidateRole;
     private String totalExperience;
     private String education;
     private String location;
