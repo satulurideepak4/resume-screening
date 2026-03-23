@@ -6,63 +6,9 @@
 
 ## Pipeline flow
 
-```mermaid
-flowchart TD
-    CANDIDATE([Candidate]) -->|form + PDF resume| CTRL
-
-    subgraph INGESTION [Ingestion Layer]
-        CTRL[ApplicationController]
-        SVC[ResumeProcessService]
-        PDF[PdfParsingService]
-    end
-
-    subgraph KAFKA [Kafka Buffer]
-        TOPIC[["resume-submissions topic - 6 partitions"]]
-    end
-
-    subgraph SCORING [Scoring Layer]
-        CONSUMER[ScoringConsumerService]
-        ENGINE[AiScoringEngine]
-        GEMINI{{Gemini 1.5 Flash}}
-        RESULT[ScoringResult]
-    end
-
-    subgraph STORAGE [Storage]
-        PG[(PostgreSQL)]
-        REDIS[(Redis Cache)]
-    end
-
-    subgraph NOTIFICATION [Notification]
-        MQ[["RabbitMQ - hr-notification-queue"]]
-        MAIL[EmailConsumerService]
-    end
-
-    subgraph DASHBOARD [HR Dashboard]
-        DASH[DashboardController]
-    end
-
-    CTRL --> SVC
-    SVC --> PDF
-    SVC -->|upsert candidate| PG
-    SVC -->|save as PENDING| PG
-    SVC -->|publish event| TOPIC
-    TOPIC -->|3 parallel threads| CONSUMER
-    CONSUMER --> ENGINE
-    ENGINE -->|JD + skills + resume| GEMINI
-    GEMINI -->|JSON score| ENGINE
-    ENGINE --> RESULT
-    RESULT -->|persist| PG
-    RESULT -->|cache TTL 24h| REDIS
-    RESULT --> DEC{score > 7.0?}
-    DEC -->|YES - shortlisted| MQ
-    DEC -->|NO| STATUS[REVIEW or LOW_MATCH]
-    MQ --> MAIL
-    MAIL -->|HTML email| HRMAIL([HR Team])
-    PG -->|cache miss| DASH
-    REDIS -->|cache hit| DASH
-    DASH --> HRVIEW([HR views ranked candidates])
-```
-
+<div align="center">
+  <img src="assets/resume-screening.svg" alt="RemoteScope demo" width="900"/>
+</div>
 ---
 
 ## Why each technology
