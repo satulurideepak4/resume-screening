@@ -9,7 +9,6 @@
 <div align="center">
   <img src="assets/resume-screening.svg" alt="RemoteScope demo" width="900"/>
 </div>
----
 
 ## Why each technology
 
